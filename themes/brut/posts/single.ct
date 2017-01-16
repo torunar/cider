@@ -1,0 +1,15 @@
+<!--{file:common/header.ct}-->
+    <!--{file:index/header.ct}-->
+    <div class="the-post container">
+        <div class="post primary-wrapper">
+            <h1 class="title"><!--{var:postTitle}--></h1>
+            <div class="preview">
+                <!--{var:postPreview}-->
+            </div>
+            <div class="content">
+                <!--{var:postContent}-->
+            </div>
+        </div>
+    </div>
+    <!--{file:index/footer.ct}-->
+<!--{file:common/footer.ct}-->

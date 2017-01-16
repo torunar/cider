@@ -1,0 +1,5 @@
+<div class="pagination">
+    <span class="link-wrapper prev"><!--{var:pageLinkPrev}--></span>
+    <span class="link-wrapper curr"><!--{var:pageLinkCurr}--></span>
+    <span class="link-wrapper next"><!--{var:pageLinkNext}--></span>
+</div>

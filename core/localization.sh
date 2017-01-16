@@ -1,0 +1,7 @@
+CIDER_mainTitle="Main"
+CIDER_mainTitlePaged="${CIDER_mainTitle} :: Page <!--{var:pageNumber}-->"
+CIDER_pageLinkPrevText="&larr;"
+CIDER_pageLinkNextText="&rarr;"
+CIDER_pageLinkCurrText="<!--{var:pageNumber}-->"
+CIDER_blogName="Cider Blog"
+CIDER_blogDescription="The first blog on Cider ever"

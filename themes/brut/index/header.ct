@@ -1,0 +1,8 @@
+<header class="blog">
+    <div class="container">
+        <h1 class="name">
+            <a class="home" href="/"><!--{var:CIDER_blogName}--></a>
+            <small class="description"><!--{var:CIDER_blogDescription}--></small>
+        </h1>
+    </div>
+</header>

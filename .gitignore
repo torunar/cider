@@ -1,0 +1,7 @@
+.idea
+*.example
+themes/*
+!themes/brut
+_input
+_output
+.DS_Store

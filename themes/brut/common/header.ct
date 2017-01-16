@@ -1,0 +1,9 @@
+<!Doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title><!--{var:mainTitle}--></title>
+    <!--{file:common/meta.ct}-->
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>

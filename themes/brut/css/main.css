@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans+Condensed:400,400i,500,500i&subset=cyrillic');
+
+/** reset **/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a, a:active {
+    outline: none;
+}
+
+a:focus {
+    -moz-outline-style: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/** general **/
+* {
+    font-family: 'Fira Sans Condensed', sans-serif;
+}
+
+small {
+    font-size: 75%;
+}
+
+h1,h2,h3,h4,h5,h6,strong,b {
+    font-weight: 500;
+    margin-bottom: 0.5em;
+}
+
+h1 {
+    font-size: 1.4em;
+    margin-top: 2.5em;
+}
+
+h2 {
+    font-size: 1.3em;
+    margin-top: 2em;
+}
+
+h3 {
+    font-size: 1.2em;
+    margin-top: 1.5em;
+}
+
+h4 {
+    font-size: 1.1em;
+    margin-top: 1em;
+}
+
+h5, h6 {
+    margin-top: 0.5em;
+}
+
+i,em {
+    font-style: italic;
+}
+
+pre,
+code {
+    font-family: monospace;
+}
+
+/** ```block of code``` **/
+pre > code,
+blockquote {
+    display: block;
+    border-left: 2px solid;
+    padding: 1em 2em;
+    margin-bottom: 1em;
+    overflow-x: scroll;
+}
+
+/** `code` **/
+code {
+    padding: 0.25em 0.5em;
+    vertical-align: middle;
+}
+
+.post .content p:last-child,
+.post .content blockquote > p:last-child {
+    margin-bottom: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+.container {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+header.blog {
+    padding: 2em 1em;
+}
+
+.blog .name {
+    margin: 0;
+}
+
+.blog .name .home {
+    text-decoration: none;
+    margin-right: 0.5em;
+}
+
+.primary-wrapper {
+    padding: 2em;
+}
+
+.post .title {
+    margin-top: 0;
+}
+
+.posts .post-wrapper {
+    margin-bottom: 2em;
+}
+
+.posts .post {
+    text-decoration: none;
+}
+
+.posts .post .date {
+    float: right;
+}
+
+.posts .post .preview,
+.post blockquote,
+.post cite {
+    max-width: 600px;
+}
+
+.post cite {
+    display: block;
+    text-align: right;
+    margin-top: -0.5em;
+}
+
+.pagination {
+    text-align: center;
+    padding: 2em 1em;
+}
+
+.pagination .link-wrapper {
+    min-width: 2em;
+    display: inline-block;
+}
+
+.pagination .link-wrapper .link {
+    text-decoration: none;
+}
+
+.the-post .preview {
+    margin: 1em 0 2em 0;
+}
+
+.the-post {
+    margin-bottom: 5em;
+}
+
+.post .preview,
+.post .content,
+.post .title {
+    line-height: 1.5em;
+}
+
+.post .content p {
+    margin-bottom: 1em;
+}
+
+.post .content ul,
+.post .content ol {
+    margin-bottom: 1em;
+    padding-left: 1em;
+}
+
+.post .content ul {
+    list-style: circle;
+}
+
+.post .content ol {
+    list-style: decimal;
+}
+
+.post .content ul li,
+.post .content ol li {
+    padding-left: 0.25em;
+    margin-bottom: 0.25em;
+}
+
+[class^="gallery-"] {
+    display: block;
+    margin: 0 -0.25em;
+}
+
+[class^="gallery-"]::after {
+    display: block;
+    content: '';
+    clear: both;
+}
+
+[class^="gallery-"] > a,
+[class^="gallery-"] > img {
+    display: block;
+    float: left;
+    padding: 0.25em;
+}
+
+[class^="gallery-"] a img {
+    width: 100%;
+}
+
+.gallery-4 > a,
+.gallery-4 > img {
+    width: 25%;
+}
+
+.gallery-2 > a,
+.gallery-2 > img {
+    width: 50%;
+}
+
+.gallery-1 a,
+.gallery-1 img {
+    width: 100%;
+}
+
+/** colors **/
+* {
+    color: #222;
+}
+
+.blog .home {
+    color: #222;
+}
+
+a:hover,
+.blog .home:hover,
+.blog .description,
+.posts .post:hover .title {
+    color: #999;
+}
+
+body {
+    background: #f7f7f7;
+}
+
+.primary-wrapper {
+    background: white;
+}
+
+code,
+blockquote {
+    background: #f7f7f7;
+}
