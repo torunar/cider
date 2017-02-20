@@ -15,7 +15,7 @@ function renderTemplate() {
     IFS=''
 
     while read -r line || [ -n "${line}" ]; do
-        local templateToRender=$(echo "${line}" | sed -E -e 's/^[ \t]*<!--{file:(.+)}-->/\1/g')
+        local templateToRender=$(echo "${line}" | sed -E -e 's/^[ \t]*<!--\{file:(.+)\}-->/\1/g')
         if [ "${templateToRender}" != "${line}" ]; then
             if [ -f "${templateToRender}" ]; then
                 renderTemplate "${templatesDir}" "${templateToRender}" "${outputPath}" 1
@@ -38,10 +38,9 @@ function renderVariable() {
         | sed -e 's~\\~\\\\~g'         \
         | sed -e 's~/~\\/~g'           \
         | sed -e 's~\&~\\\&~g'         \
-        | tr '\n' '�'                  \
-        | sed -E -e 's/^�?(.*)�$/\1/g' \
+        | tr '\n' '\r'                 \
     )
-    local renderedTemplate=$(sed -e $"s/<!--{var:${varName}}-->/${varValue}/g" "${templatePath}" | tr '�' '\n')
+    local renderedTemplate=$(sed -e $"s/<!--{var:${varName}}-->/${varValue}/g" "${templatePath}" | tr '\r' '\n')
     echo -n "${renderedTemplate}" > "${templatePath}"
 }
 
