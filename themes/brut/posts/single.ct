@@ -2,6 +2,7 @@
     <!--{file:index/header.ct}-->
     <div class="the-post container">
         <div class="post primary-wrapper">
+            <small class="date"><!--{var:postDate}--></small>
             <h1 class="title"><!--{var:postTitle}--></h1>
             <div class="preview">
                 <!--{var:postPreview}-->

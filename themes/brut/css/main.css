@@ -161,8 +161,10 @@ header.blog {
     text-decoration: none;
 }
 
-.posts .post .date {
+.post .date {
     float: right;
+    padding-top: 0.7em;
+    margin-left: 1em;
 }
 
 .posts .post .preview,
