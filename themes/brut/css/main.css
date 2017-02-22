@@ -112,6 +112,10 @@ blockquote {
     overflow-x: scroll;
 }
 
+pre > code {
+    line-height: 1.2;
+}
+
 /** `code` **/
 code {
     padding: 0.25em 0.5em;
