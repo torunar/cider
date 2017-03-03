@@ -60,8 +60,16 @@ a:focus {
     font-family: 'Fira Sans Condensed', sans-serif;
 }
 
-small {
+small, sub, sup {
     font-size: 75%;
+}
+
+sub {
+    vertical-align: -0.75em;
+}
+
+sup {
+    vertical-align: 0.75em;
 }
 
 h1,h2,h3,h4,h5,h6,strong,b {
