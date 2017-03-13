@@ -169,6 +169,10 @@ header.blog {
     margin-bottom: 2em;
 }
 
+.posts .post-wrapper:last-of-type {
+    margin-bottom: 0;
+}
+
 .posts .post {
     text-decoration: none;
 }
