@@ -1,7 +1,7 @@
 <div class="post-wrapper primary-wrapper">
     <a class="post" href="<!--{var:postLink}-->">
         <small class="date"><!--{var:postDate}--></small>
-        <h3 class="title"><!--{var:postTitle}--></h3>
+        <h2 class="title"><!--{var:postTitle}--></h3>
         <div class="preview">
             <!--{var:postPreview}-->
         </div>
