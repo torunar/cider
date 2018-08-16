@@ -114,7 +114,7 @@ for postPath in "${postsList[@]}"; do
     # add post to sitemap
     writeSitemapEntry "${CIDER_outputDir}" "${CIDER_host}${postLink}"
     if [ $pageNumber == 1 ]; then
-        writeRssEntry "${CIDER_outputDir}" "${postTitle}" "${CIDER_host}${postLink}" "${postContent}" "${postDate}"
+        writeRssEntry "${CIDER_outputDir}" "${postTitle}" "${CIDER_host}${postLink}" "${postPreview}${postContent}" "${postDate}"
     fi
 
     ((count++))
