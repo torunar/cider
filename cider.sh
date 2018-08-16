@@ -60,9 +60,11 @@ if [ "${postsList}" == "" ]; then
 fi
 
 #
-# open sitemap
+# open sitemap and RSS
 #
 writeSitemapHeader "${CIDER_outputDir}"
+writeRssHeader "${CIDER_outputDir}" "${CIDER_blogName}" "${CIDER_host}" "${CIDER_blogDescription}" "${CIDER_blogLanguage}"
+
 
 lastPostPath="${postsList[${#postsList[@]}-1]}"
 for postPath in "${postsList[@]}"; do
@@ -111,6 +113,9 @@ for postPath in "${postsList[@]}"; do
 
     # add post to sitemap
     writeSitemapEntry "${CIDER_outputDir}" "${CIDER_host}${postLink}"
+    if [ $pageNumber == 1 ]; then
+        writeRssEntry "${CIDER_outputDir}" "${postTitle}" "${CIDER_host}${postLink}" "${postContent}" "${postDate}"
+    fi
 
     ((count++))
 
@@ -167,3 +172,4 @@ find "${CIDER_outputDir}" -type d -empty -delete
 # close sitemap
 #
 writeSitemapFooter "${CIDER_outputDir}"
+writeRssFooter "${CIDER_outputDir}"

@@ -2,6 +2,8 @@
 # load compiler
 #
 source "${CIDER_cellar}/core/compiler.sh"
+source "${CIDER_cellar}/core/sitemap.sh"
+source "${CIDER_cellar}/core/rss.sh"
 
 function getPostTitle() {
     head -n 1 "${1}" | sed -n -E -e 's/^<h1>(.*)<\/h1>$/\1/gp'
@@ -80,25 +82,4 @@ function getPostsList() {
         | sed -E -e 's~(.*)([0-9]{4}/[0-9]{2}/[0-9]{2}/[^/]+)/index.md~\2~g' \
         | sort -r \
     )
-}
-
-function writeSitemapHeader() {
-    cat > "${1}/sitemap.xml" <<XML
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-XML
-}
-
-function writeSitemapEntry() {
-    cat >> "${1}/sitemap.xml" <<XML
-    <url>
-        <loc>${2}</loc>
-    </url>
-XML
-}
-
-function writeSitemapFooter() {
-    cat >> "${1}/sitemap.xml" <<XML
-</urlset>
-XML
 }
