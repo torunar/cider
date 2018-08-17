@@ -27,12 +27,13 @@ function writeRssEntry() {
     local title=$(stripTags "${2}")
     local link="${3}"
     local description=$(echo -n "${4}" | sed -e "s~<img src=\"\.~<img src=\"${link}~g" | sed -e "s~<a href=\"\.~<a href=\"${link}~g")
-    local pubDate="${5}"
+    local pubDate=$(date -j -f "%Y/%m/%d %T" "${5} 00:00:00" +"%a, %d %b %Y %T %Z")
 
     cat >> "${1}/rss.xml" <<XML
         <item>
             <title>${title}</title>
             <link>${link}</link>
+            <guid>${link}</guid>
             <description><![CDATA[${description}]]></description>
             <pubDate>${pubDate}</pubDate>
         </item>
