@@ -144,15 +144,15 @@ img {
     margin: 0 auto;
 }
 
-header.blog {
+.header {
     padding: 2em 1em;
 }
 
-.blog .name {
+.header .name {
     margin: 0;
 }
 
-.blog .name .home {
+.header .name .home {
     text-decoration: none;
     margin-right: 0.5em;
 }
@@ -197,7 +197,7 @@ header.blog {
 
 .pagination {
     text-align: center;
-    padding: 2em 1em;
+    padding: 2em 1em 1em 1em;
 }
 
 .pagination .link-wrapper {
@@ -214,7 +214,7 @@ header.blog {
 }
 
 .the-post {
-    margin-bottom: 5em;
+    margin-bottom: 4em;
 }
 
 .post .preview,
@@ -284,18 +284,30 @@ header.blog {
     width: 100%;
 }
 
+.footer {
+    padding: 1em 1em 2em 1em;
+}
+
+.footer .links {
+    text-align: right;
+}
+
+.footer .links a {
+    margin-left: 1em;
+}
+
 /** colors **/
 * {
     color: #222;
 }
 
-.blog .home {
+.header .home {
     color: #222;
 }
 
 a:hover,
-.blog .home:hover,
-.blog .description,
+.header .home:hover,
+.header .description,
 .posts .post:hover .title {
     color: #999;
 }
