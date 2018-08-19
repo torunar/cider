@@ -103,6 +103,12 @@ for postPath in "${postsList[@]}"; do
     renderTemplate "${CIDER_themeDir}" "posts/single.ct" "${compiledPostPath}"
     renderTemplate "${CIDER_themeDir}" "posts/list_item.ct" "${listItemPath}"
 
+    if [ -z "${CIDER_disqusId}" ]; then
+        renderVariable "${compiledPostPath}" "postComments" ""
+    else
+        renderPostComments "${compiledPostPath}" "${CIDER_host}${postLink}" "${postLink}" "${outputDir}"
+    fi
+
     tr=( "${CIDER_localization[@]}" postLink postDate postTitle postPreview postContent mainTitle )
     for varName in "${tr[@]}"; do
         renderVariable "${compiledPostPath}" "${varName}" "${!varName}"

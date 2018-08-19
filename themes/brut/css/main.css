@@ -161,7 +161,8 @@ img {
     padding: 2em;
 }
 
-.post .title {
+.post .title,
+.comments .title {
     margin-top: 0;
 }
 
@@ -215,6 +216,10 @@ img {
 
 .the-post {
     margin-bottom: 4em;
+}
+
+.the-post .comments {
+    margin-top: 2em;
 }
 
 .post .preview,
@@ -286,10 +291,6 @@ img {
 
 .footer {
     padding: 1em 1em 2em 1em;
-}
-
-.footer .links {
-    text-align: right;
 }
 
 .footer .links a {
