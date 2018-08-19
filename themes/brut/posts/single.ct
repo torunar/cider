@@ -12,6 +12,7 @@
                     <!--{var:postContent}-->
                 </div>
             </div>
+            <!--{var:postComments}-->
         </div>
     </div>
     <!--{file:index/footer.ct}-->

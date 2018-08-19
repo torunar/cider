@@ -83,3 +83,17 @@ function getPostsList() {
         | sort -r \
     )
 }
+
+function renderPostComments() {
+    local compiledPostPath="${1}"
+    local postLink="${2}"
+    local postId="${3}"
+    local outputDir="${4}"
+
+    renderTemplate "${CIDER_themeDir}" "posts/comments.ct" "${outputDir}/comments.html"
+    renderVariable "${outputDir}/comments.html" "postId" "${postLink}"
+    renderVariable "${outputDir}/comments.html" "postLink" "${postLink}"
+    renderVariable "${compiledPostPath}" "postComments" "$(cat "${outputDir}/comments.html")"
+
+#    rm -f "${outputDir}/comments.html"
+}
