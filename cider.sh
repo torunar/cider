@@ -86,7 +86,7 @@ for postPath in "${postsList[@]}"; do
         exit $?
     fi
 
-    postLink="/${postPath}"
+    postLink="/${postPath}/"
 
     postDate=$(getPostDate "${postPath}")
 
