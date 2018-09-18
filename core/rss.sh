@@ -42,7 +42,7 @@ XML
 function writeRssEntry() {
     local title=$(stripTags "${2}")
     local link="${3}"
-    local description=$(echo -n "${4}" | sed -e "s~<img src=\"\.~<img src=\"${link}~g" | sed -e "s~<a href=\"\.~<a href=\"${link}~g")
+    local description=$(echo -n "${4}" | sed -e "s~<img src=\"\.\/~<img src=\"${link}~g" | sed -e "s~<a href=\"\.\/~<a href=\"${link}~g")
     local pubDate=$(formatDateRfc822 "${5}")
 
     cat >> "${1}/rss.xml" <<XML
