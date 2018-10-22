@@ -95,5 +95,5 @@ function renderPostComments() {
     renderVariable "${outputDir}/comments.html" "postLink" "${postLink}"
     renderVariable "${compiledPostPath}" "postComments" "$(cat "${outputDir}/comments.html")"
 
-#    rm -f "${outputDir}/comments.html"
+    rm -f "${outputDir}/comments.html"
 }
