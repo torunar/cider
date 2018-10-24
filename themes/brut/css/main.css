@@ -130,8 +130,8 @@ code {
     vertical-align: middle;
 }
 
-.post .content p:last-child,
-.post .content blockquote > p:last-child {
+.post .content > p:last-child,
+.post .content > blockquote > p:last-child {
     margin-bottom: 0;
 }
 
@@ -228,7 +228,7 @@ img {
     line-height: 1.5em;
 }
 
-.post .content p {
+.post .content > p {
     margin-bottom: 1em;
 }
 
