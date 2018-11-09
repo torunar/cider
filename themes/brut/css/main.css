@@ -161,6 +161,12 @@ img {
     padding: 2em;
 }
 
+@media screen and (max-width: 630px) {
+    .primary-wrapper {
+        padding: 2em 1em;
+    }
+}
+
 .post .title,
 .comments .title {
     margin-top: 0;
