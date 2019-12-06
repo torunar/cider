@@ -9,6 +9,10 @@ function parseArgs()
             -h|--help)
                 local error=1
                 ;;
+            -b=*|--buildPost=*)
+                CIDER_buildPost="${arg#*=}"
+                shift;
+                ;;
             -c=*|--config=*)
                 source "${arg#*=}"
                 return 0
@@ -89,7 +93,10 @@ CIDER: Markdown-based blogging engine using BASH.
 
 Usage:
 
-    cider.sh [-c|--config] [-l|--localization] [-i|--inputDir] [-o|--outputDir] [-t|--theme] [-p|--pageSize] [-H|--host] [-h|--help]
+    cider.sh [-b|--buildPost] [-c|--config] [-l|--localization] [-i|--inputDir] [-o|--outputDir] [-t|--theme] [-p|--pageSize] [-H|--host] [-h|--help]
+
+    -b|--buildPost     Slug of the single post to be built.
+                       E.g.: 2019/12/25/merry-xmas
 
     -c|--config        Path to the configuration file.
                        The default one is loaded from `core/config.sh`

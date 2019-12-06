@@ -78,7 +78,10 @@ function getPostDate() {
 }
 
 function getPostsList() {
-    echo $(find "${1}" -type f -name "index.md" \
+    local inputDir="${1}"
+    local buildPost="${2}"
+    echo $(find "${inputDir}" -type f -name "index.md" \
+        | grep "${buildPost}" \
         | sed -E -e 's~(.*)([0-9]{4}/[0-9]{2}/[0-9]{2}/[^/]+)/index.md~\2~g' \
         | sort -r \
     )
