@@ -15,7 +15,7 @@ function parseArgs()
                 ;;
             -c=*|--config=*)
                 source "${arg#*=}"
-                return 0
+                shift
                 ;;
             -l=*|--localization=*)
                 source "${arg#*=}"
