@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+CIDER_version="1.1.0"
+
 # a cellar is the place where a cider comes from
 CIDER_cellar="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CIDER_currentDir=$(pwd -P)
@@ -65,7 +67,7 @@ fi
 #
 if [ -z "${CIDER_buildPost}" ]; then
     writeSitemapHeader "${CIDER_outputDir}"
-    writeRssHeader "${CIDER_outputDir}" "${CIDER_blogName}" "${CIDER_host}" "${CIDER_blogDescription}" "${CIDER_blogLanguage}"
+    writeRssHeader "${CIDER_outputDir}" "${CIDER_blogName}" "${CIDER_host}" "${CIDER_blogDescription}" "${CIDER_blogLanguage}" "${CIDER_version}"
 fi
 
 

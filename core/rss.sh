@@ -24,6 +24,7 @@ function writeRssHeader() {
     local link="${3}"
     local description=$(stripTags "${4}")
     local language="${5}"
+    local version=${6}
     local lastBuildDate=$(formatDateRfc822)
 
     cat > "${1}/rss.xml" <<XML
@@ -35,7 +36,7 @@ function writeRssHeader() {
         <description>${description}</description>
         <language>${language}</language>
         <lastBuildDate>${lastBuildDate}</lastBuildDate>
-        <generator>Cider</generator>
+        <generator>Cider v${version}</generator>
 XML
 }
 
