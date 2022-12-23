@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+CIDER_version="1.1.1"
+
 # a cellar is the place where a cider comes from
 CIDER_cellar="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CIDER_currentDir=$(pwd -P)
@@ -54,16 +56,19 @@ cp -r "${CIDER_themeDir}/"* "${CIDER_outputDir}"
 #
 count=0
 pageNumber=1
-postsList=($(getPostsList "${CIDER_inputDir}"))
-if [ "${postsList}" == "" ]; then
+postsList=($(getPostsList "${CIDER_inputDir}" "${CIDER_buildPost}"))
+if [ -z "${postsList}" ]; then
+    echo 'No posts to render'
     exit 0
 fi
 
 #
 # open sitemap and RSS
 #
-writeSitemapHeader "${CIDER_outputDir}"
-writeRssHeader "${CIDER_outputDir}" "${CIDER_blogName}" "${CIDER_host}" "${CIDER_blogDescription}" "${CIDER_blogLanguage}"
+if [ -z "${CIDER_buildPost}" ]; then
+    writeSitemapHeader "${CIDER_outputDir}"
+    writeRssHeader "${CIDER_outputDir}" "${CIDER_blogName}" "${CIDER_host}" "${CIDER_blogDescription}" "${CIDER_blogLanguage}" "${CIDER_version}"
+fi
 
 
 lastPostPath="${postsList[${#postsList[@]}-1]}"
@@ -98,7 +103,7 @@ for postPath in "${postsList[@]}"; do
 
     mainTitle=$(stripTags "${postTitle}")
 
-    echo "${postLink}: ${mainTitle}"
+    echo "${CIDER_host}${postLink}: ${mainTitle}"
 
     renderTemplate "${CIDER_themeDir}" "posts/single.ct" "${compiledPostPath}"
     renderTemplate "${CIDER_themeDir}" "posts/list_item.ct" "${listItemPath}"
@@ -117,6 +122,11 @@ for postPath in "${postsList[@]}"; do
 
     rm -f "${tmpPostPath}"
 
+
+    if [ ! -z "${CIDER_buildPost}" ]; then
+        continue
+    fi
+
     # add post to sitemap
     writeSitemapEntry "${CIDER_outputDir}" "${CIDER_host}${postLink}"
     if [ $pageNumber == 1 ]; then
@@ -125,6 +135,9 @@ for postPath in "${postsList[@]}"; do
 
     ((count++))
 
+    #
+    # render index page
+    #
     if [[ "${count}" == "${CIDER_pageSize}" || "${postPath}" == "${lastPostPath}" ]]; then
 
         if [ $pageNumber == 1 ]; then
@@ -172,10 +185,13 @@ done
 #
 find "${CIDER_outputDir}" -type f -name "*.md" -delete
 find "${CIDER_outputDir}" -type f -name "*.ct" -delete
+find "${CIDER_outputDir}" -type f -name "post_*.html" -delete
 find "${CIDER_outputDir}" -type d -empty -delete
 
 #
 # close sitemap
 #
-writeSitemapFooter "${CIDER_outputDir}"
-writeRssFooter "${CIDER_outputDir}"
+if [ -z "${CIDER_buildPost}" ]; then
+    writeSitemapFooter "${CIDER_outputDir}"
+    writeRssFooter "${CIDER_outputDir}"
+fi
