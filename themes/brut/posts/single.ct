@@ -1,14 +1,16 @@
 <!--{file:common/header.ct}-->
     <!--{file:index/header.ct}-->
-    <div class="the-post">
-        <div class="container">
-            <div class="post primary-wrapper">
-                <small class="date"><!--{var:postDate}--></small>
-                <h1 class="title"><!--{var:postTitle}--></h1>
-                <div class="preview">
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title"><!--{var:postTitle}--></h1>
+                    <small class="post__date"><!--{var:postDate}--></small>
+                </div>
+                <div class="post__preview">
                     <!--{var:postPreview}-->
                 </div>
-                <div class="content">
+                <div class="post__content">
                     <!--{var:postContent}-->
                 </div>
             </div>

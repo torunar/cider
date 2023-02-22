@@ -1,7 +1,7 @@
 <!--{file:common/header.ct}-->
     <!--{file:index/header.ct}-->
-    <div class="the-index container">
-        <div class="posts">
+    <div class="container">
+        <div class="feed">
             <!--{var:postsList}-->
         </div>
         <!--{file:common/pagination.ct}-->

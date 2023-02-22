@@ -132,7 +132,7 @@ Dependencies:
     less       https://linux.die.net/man/1/less
     echo       https://linux.die.net/man/1/echo
     markdown   http://daringfireball.net/projects/markdown/
-' | less
+'
 }
 
 function showLogo() {

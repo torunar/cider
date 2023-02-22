@@ -21,18 +21,18 @@ source "${CIDER_cellar}/core/localization.sh"
 CIDER_localization=( $(compgen -A variable | grep CIDER_) )
 
 #
-# check dependencies
+# parse CLI arguments
 #
-checkDependencies
+parseArgs $@
 if [ $? -ne 0 ]; then
     help
     exit $?
 fi
 
 #
-# parse CLI arguments
+# check dependencies
 #
-parseArgs $@
+checkDependencies
 if [ $? -ne 0 ]; then
     help
     exit $?
