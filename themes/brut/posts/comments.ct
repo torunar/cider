@@ -1,5 +1,5 @@
-<div class="comments primary-wrapper">
-    <h2 class="title"><!--{var:CIDER_commentsTitle}--></h2>
+<div class="post__comments primary-wrapper">
+    <h2 class="post-comments__title"><!--{var:CIDER_commentsTitle}--></h2>
     <div id="disqus_thread"></div>
 </div>
 
