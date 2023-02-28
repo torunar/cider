@@ -345,6 +345,23 @@ code {
     white-space: pre;
 }
 
+ul {
+    list-style: circle outside;
+    display: block;
+    padding-left: 1em;
+}
+
+ol {
+    list-style: decimal outside;
+    display: block;
+    padding-left: 1em;
+}
+
+li {
+    display: list-item;
+    margin-bottom: 0.5em;
+}
+
 .container {
     max-width: 860px;
     margin: 0 auto;
