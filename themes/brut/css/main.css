@@ -128,7 +128,7 @@ code {
 }
 
 .header {
-    padding: var(--uiGap) var(--uiHalfGap);
+    padding: var(--uiHalfGap);
 }
 
 .header__home-link {
@@ -275,9 +275,13 @@ iframe {
 }
 
 .footer {
-    padding: var(--uiHalfGap) var(--uiHalfGap) var(--uiGap) var(--uiHalfGap);
+    padding: var(--uiHalfGap) 0;
+}
+
+.footer__links {
+    padding: 0 var(--uiHalfGap);
 }
 
 .footer__links > a {
-    margin-left: var(--uiHalfGap);
+    margin-right: var(--uiHalfGap);
 }
