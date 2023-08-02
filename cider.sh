@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CIDER_version="3.1.1"
+CIDER_version="3.2.0"
 
 # a cellar is the place where a cider comes from
 CIDER_cellar="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -92,6 +92,7 @@ for postPath in "${postsList[@]}"; do
     fi
 
     postLink="/${postPath}/"
+    canonicalLink="${CIDER_host}${postLink}"
 
     postDate=$(getPostDate "${postPath}")
 
@@ -103,7 +104,7 @@ for postPath in "${postsList[@]}"; do
 
     mainTitle=$(stripTags "${postTitle}")
 
-    echo "${CIDER_host}${postLink}: ${mainTitle}"
+    echo "${canonicalLink}: ${mainTitle}"
 
     renderTemplate "${CIDER_themeDir}" "posts/single.ct" "${compiledPostPath}"
     renderTemplate "${CIDER_themeDir}" "posts/list_item.ct" "${listItemPath}"
@@ -114,14 +115,13 @@ for postPath in "${postsList[@]}"; do
         renderPostComments "${compiledPostPath}" "${CIDER_host}${postLink}" "${postLink}" "${outputDir}"
     fi
 
-    tr=( "${CIDER_localization[@]}" postLink postDate postTitle postPreview postContent mainTitle )
+    tr=( "${CIDER_localization[@]}" postLink postDate postTitle postPreview postContent mainTitle canonicalLink )
     for varName in "${tr[@]}"; do
         renderVariable "${compiledPostPath}" "${varName}" "${!varName}"
         renderVariable "${listItemPath}" "${varName}" "${!varName}"
     done
 
     rm -f "${tmpPostPath}"
-
 
     if [ ! -z "${CIDER_buildPost}" ]; then
         continue
@@ -143,9 +143,11 @@ for postPath in "${postsList[@]}"; do
         if [ $pageNumber == 1 ]; then
             indexPagePath="${CIDER_outputDir}/index.html"
             mainTitle="${CIDER_mainTitle}"
+            canonicalLink="${CIDER_host}/"
         else
             indexPagePath="${CIDER_outputDir}/${pageNumber}/index.html"
             mainTitle="${CIDER_mainTitlePaged}"
+            canonicalLink="${CIDER_host}/${pageNumber}/"
         fi
 
         mkdir -p $(dirname "${indexPagePath}")
@@ -167,7 +169,7 @@ for postPath in "${postsList[@]}"; do
 
         postsList=$(cat "${CIDER_outputDir}/post_"*.html)
 
-        tr=( "${CIDER_localization[@]}" mainTitle postsList pageNumber )
+        tr=( "${CIDER_localization[@]}" mainTitle postsList pageNumber canonicalLink )
         for varName in "${tr[@]}"; do
             renderVariable "${indexPagePath}" "${varName}" "${!varName}"
         done
