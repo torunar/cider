@@ -2,6 +2,7 @@
 *.example
 themes/*
 !themes/brut
+!themes/book-shelve
 _input
 _output
 .DS_Store

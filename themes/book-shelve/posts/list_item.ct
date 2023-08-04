@@ -1,0 +1,11 @@
+<div class="post post--feed">
+    <div class="primary-wrapper">
+        <a class="post__title-wrapper" href="<!--{var:postLink}-->">
+            <h2 class="post__title"><!--{var:postTitle}--></h2>
+            <small class="post__date"><!--{var:postDate}--></small>
+        </a>
+        <div class="post__preview post__preview--feed">
+            <!--{var:postPreview}-->
+        </div>
+    </div>
+</div>

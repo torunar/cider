@@ -1,0 +1,11 @@
+<!--{file:common/header.ct}-->
+    <div class="img-wrapper img-wrapper--index"></div>
+    <!--{file:index/header.ct}-->
+    <div class="container">
+        <div class="feed">
+            <!--{var:postsList}-->
+        </div>
+        <!--{file:common/pagination.ct}-->
+    </div>
+    <!--{file:index/footer.ct}-->
+<!--{file:common/footer.ct}-->

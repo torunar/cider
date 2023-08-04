@@ -1,0 +1,22 @@
+<!--{file:common/header.ct}-->
+    <div class="img-wrapper img-wrapper--post"></div>
+    <!--{file:index/header.ct}-->
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title"><!--{var:postTitle}--></h1>
+                    <small class="post__date"><!--{var:postDate}--></small>
+                </div>
+                <div class="post__preview">
+                    <!--{var:postPreview}-->
+                </div>
+                <div class="post__content">
+                    <!--{var:postContent}-->
+                </div>
+            </div>
+            <!--{var:postComments}-->
+        </div>
+    </div>
+    <!--{file:index/footer.ct}-->
+<!--{file:common/footer.ct}-->
