@@ -244,10 +244,12 @@ a.post__title-wrapper:hover {
 
 .post__preview {
     margin: var(--textMargin) 0;
+    padding-bottom: var(--textMargin);
+    border-bottom: 1px solid var(--accentFgColor);
 }
 
 .post__preview img {
-    margin-bottom: 1em;
+    margin-bottom: var(--textMargin);
 }
 
 .post__preview--feed {
