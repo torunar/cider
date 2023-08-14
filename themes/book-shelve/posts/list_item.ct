@@ -1,6 +1,6 @@
 <div class="post post--feed">
     <div class="primary-wrapper">
-        <a class="post__title-wrapper" href="<!--{var:postLink}-->">
+        <a class="post__title-wrapper" href="<!--{var:CIDER_host}--><!--{var:postLink}-->">
             <h2 class="post__title"><!--{var:postTitle}--></h2>
             <small class="post__date"><!--{var:postDate}--></small>
         </a>

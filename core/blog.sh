@@ -20,7 +20,7 @@ function getPostPreview() {
             q
         }
         b loop
-    }' "${1}"
+    }' "${1}" | sed -E -e "s~(src=|href=)\"/~\1\"${CIDER_host}/~g"
 }
 
 # search for a line where description ends
@@ -45,7 +45,7 @@ function getPostContent() {
         local skipPosition=2
     fi
 
-    sed -e "1,${skipPosition}d" "${1}"
+    sed -e "1,${skipPosition}d" "${1}" | sed -E -e "s~(src=|href=)\"/~\1\"${CIDER_host}/~g"
 }
 
 function getPostDir() {
@@ -60,9 +60,9 @@ function renderPaginationLink() {
     local outputDir="${5}"
 
     if [ $pageNumber == 1 ]; then
-        local pageLinkUrl="/"
+        local pageLinkUrl="${CIDR_host}/"
     else
-        local pageLinkUrl="/${pageNumber}/"
+        local pageLinkUrl="${CIDER_host}/${pageNumber}/"
     fi
 
     renderTemplate "${CIDER_themeDir}" "common/page_link.ct" "${outputDir}/page_link.html"

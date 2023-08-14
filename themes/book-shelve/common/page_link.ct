@@ -1,1 +1,1 @@
-<a class="pagination__link" href="<!--{var:pageLinkUrl}-->"><!--{var:pageLinkText}--></a>
+<a class="pagination__link" href="<!--{var:pageLinkUrl}-->#top"><!--{var:pageLinkText}--></a>

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CIDER_version="3.2.0"
+CIDER_version="3.3.0"
 
 # a cellar is the place where a cider comes from
 CIDER_cellar="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
