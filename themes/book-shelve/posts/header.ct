@@ -1,4 +1,4 @@
-<header class="header header--feed">
+<header class="header header--post">
     <div class="container" id="top">
         <h1 class="header__title">
             <a class="header__home-link" href="/#top"><!--{var:CIDER_blogName}--></a>
