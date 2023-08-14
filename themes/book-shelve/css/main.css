@@ -206,9 +206,8 @@ iframe {
 .post__title-wrapper {
     display: grid;
     grid-template:
-        "date" 100%
-        "title" 100%;
-    gap: 0;
+            "date"
+            "title";
     text-decoration: none;
 }
 
