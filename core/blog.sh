@@ -112,3 +112,99 @@ function renderPostComments() {
 
     rm -f "${outputDir}/comments.html"
 }
+
+function renderPost() {
+    local postPath="${1}"
+    local pageNumber="${2}"
+    local postNumber="${3}"
+
+    inputPath="${CIDER_inputDir}/${postPath}/index.md"
+    outputDir="${CIDER_outputDir}/${postPath}"
+
+    mkdir -p "${outputDir}"
+    cp -r "${CIDER_inputDir}/${postPath}/"* "${outputDir}"
+
+    tmpPostPath="${outputDir}/.index.html"
+    compiledPostPath="${outputDir}/index.html"
+    listItemPath="${CIDER_outputDir}/post_${postNumber}.html"
+    postLink="/${postPath}/"
+    canonicalLink="${CIDER_host}${postLink}"
+
+    markdown -html4tags "${inputPath}" > "${tmpPostPath}"
+
+    postDate=$(getPostDate "${postPath}")
+    postTitle=$(getPostTitle "${tmpPostPath}")
+
+    postPreview=$(getPostPreview "${tmpPostPath}" "${postLink}")
+    postContent=$(getPostContent "${tmpPostPath}" "${postLink}")
+
+    mainTitle=$(stripTags "${postTitle}")
+
+    echo "${canonicalLink}: ${mainTitle}"
+
+    renderTemplate "${CIDER_themeDir}" "posts/single.ct" "${compiledPostPath}"
+    renderTemplate "${CIDER_themeDir}" "posts/list_item.ct" "${listItemPath}"
+
+    if [ -z "${CIDER_disqusId}" ]; then
+        renderVariable "${compiledPostPath}" "postComments" ""
+    else
+        renderPostComments "${compiledPostPath}" "${CIDER_host}${postLink}" "${postLink}" "${outputDir}"
+    fi
+
+    tr=( "${CIDER_localization[@]}" postLink postDate postTitle postPreview postContent mainTitle canonicalLink )
+    for varName in "${tr[@]}"; do
+        renderVariable "${compiledPostPath}" "${varName}" "${!varName}"
+        renderVariable "${listItemPath}" "${varName}" "${!varName}"
+    done
+
+    rm -f "${tmpPostPath}"
+
+    # add post to sitemap and RSS feed
+    if [ -z "${CIDER_buildPost}" ]; then
+        writeSitemapEntry "${CIDER_outputDir}" "${canonicalLink}"
+        if [ $pageNumber == 1 ]; then
+            writeRssEntry "${CIDER_outputDir}" "${postTitle}" "${canonicalLink}" "${postPreview}${postContent}" "${postDate}"
+        fi
+    fi
+}
+
+function renderIndexPage() {
+    local pageNumber="${1}"
+
+    if [ $pageNumber == 1 ]; then
+        indexPagePath="${CIDER_outputDir}/index.html"
+        mainTitle="${CIDER_mainTitle}"
+        canonicalLink="${CIDER_host}/"
+    else
+        indexPagePath="${CIDER_outputDir}/${pageNumber}/index.html"
+        mainTitle="${CIDER_mainTitlePaged}"
+        canonicalLink="${CIDER_host}/${pageNumber}/"
+    fi
+
+    mkdir -p $(dirname "${indexPagePath}")
+    renderTemplate "${CIDER_themeDir}" "index.ct" "${indexPagePath}"
+
+    if [ $pageNumber -gt 1 ]; then
+        renderPaginationLink "${indexPagePath}" "pageLinkPrev" "$(( $pageNumber - 1))" "${CIDER_pageLinkPrevText}" "${CIDER_outputDir}"
+    else
+        renderVariable "${indexPagePath}" "pageLinkPrev" ""
+    fi
+
+    renderPaginationLink "${indexPagePath}" "pageLinkCurr" "${pageNumber}" "${CIDER_pageLinkCurrText}" "${CIDER_outputDir}"
+
+    if [ "${postPath}" != "${lastPostPath}" ]; then
+        renderPaginationLink "${indexPagePath}" "pageLinkNext" "$(( pageNumber + 1 ))" "${CIDER_pageLinkNextText}" "${CIDER_outputDir}"
+    else
+        renderVariable "${indexPagePath}" "pageLinkNext" ""
+    fi
+
+    postsList=$(cat "${CIDER_outputDir}/post_"*.html)
+
+    tr=( "${CIDER_localization[@]}" mainTitle postsList pageNumber canonicalLink )
+    for varName in "${tr[@]}"; do
+        renderVariable "${indexPagePath}" "${varName}" "${!varName}"
+    done
+
+    rm -f "${CIDER_outputDir}/post_"*.html
+    rm -f "${CIDER_outputDir}/page_link.html"
+}
