@@ -11,6 +11,9 @@ function getPostTitle() {
 
 # search for a block between two <hr>'s
 function getPostPreview() {
+    local postFilePath="${1}"
+    local postLink="${2}"
+
     sed -n -e $'/<hr>/{
         n
         :loop
@@ -20,11 +23,16 @@ function getPostPreview() {
             q
         }
         b loop
-    }' "${1}" | sed -E -e "s~(src=|href=)\"/~\1\"${CIDER_host}/~g"
+    }' "${postFilePath}" \
+        | sed -E -e "s~(src=|href=)\"\./~\1\"${postLink}~g" \
+        | sed -E -e "s~(src=|href=)\"/~\1\"${CIDER_host}/~g"
+
 }
 
 # search for a line where description ends
 function getPostPreviewPosition() {
+    local postFilePath="${1}"
+
     sed -n -e $'/<hr>/{
         :loop
         n
@@ -33,11 +41,12 @@ function getPostPreviewPosition() {
             q
         }
         b loop
-    }' "${1}"
+    }' "${postFilePath}"
 }
 
 function getPostContent() {
     local previewPosition=$(getPostPreviewPosition "${1}")
+    local postLink="${2}"
 
     if [ "${previewPosition}" != "" ]; then
         local skipPosition=$previewPosition
@@ -45,7 +54,10 @@ function getPostContent() {
         local skipPosition=2
     fi
 
-    sed -e "1,${skipPosition}d" "${1}" | sed -E -e "s~(src=|href=)\"/~\1\"${CIDER_host}/~g"
+    sed -e "1,${skipPosition}d" "${1}" \
+        | sed -E -e "s~(src=|href=)\"\./~\1\"${postLink}~g" \
+        | sed -E -e "s~(src=|href=)\"/~\1\"${CIDER_host}/~g"
+
 }
 
 function getPostDir() {

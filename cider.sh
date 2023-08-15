@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CIDER_version="3.3.0"
+CIDER_version="3.3.1"
 
 # a cellar is the place where a cider comes from
 CIDER_cellar="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -95,12 +95,10 @@ for postPath in "${postsList[@]}"; do
     canonicalLink="${CIDER_host}${postLink}"
 
     postDate=$(getPostDate "${postPath}")
-
     postTitle=$(getPostTitle "${tmpPostPath}")
 
-    postPreview=$(getPostPreview "${tmpPostPath}")
-
-    postContent=$(getPostContent "${tmpPostPath}")
+    postPreview=$(getPostPreview "${tmpPostPath}" "${postLink}")
+    postContent=$(getPostContent "${tmpPostPath}" "${postLink}")
 
     mainTitle=$(stripTags "${postTitle}")
 
