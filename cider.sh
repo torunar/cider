@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CIDER_version="3.3.1"
+CIDER_version="4.0.0"
 
 # a cellar is the place where a cider comes from
 CIDER_cellar="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -56,7 +56,11 @@ fi
 
 lastPostPath="${postsList[${#postsList[@]}-1]}"
 for postPath in "${postsList[@]}"; do
-    renderPost "${postPath}" "${pageNumber}" "${postNumber}"
+    if [[ "$((postNumber + 1))" == "${CIDER_pageSize}" || "${postPath}" == "${lastPostPath}" ]]; then
+        renderPost "${postPath}" "${pageNumber}" "${postNumber}"
+    else
+        renderPost "${postPath}" "${pageNumber}" "${postNumber}" &
+    fi
     ((postNumber++))
 
     if [ ! -z "${CIDER_buildPost}" ]; then
