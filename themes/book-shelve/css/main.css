@@ -121,7 +121,18 @@ a:active, a:active > * {
 
 iframe {
     width: 100%;
-    height: 415px;
+    aspect-ratio: 16 / 9;
+    margin-bottom: var(--textMargin);
+}
+
+@supports not (aspect-ratio: 16 / 9) {
+    iframe {
+        height: 445px;
+    }
+}
+
+iframe:last-of-type {
+    margin-bottom: 0;
 }
 
 .container {
@@ -225,11 +236,6 @@ a.post__title-wrapper:hover {
     grid-area: title;
 }
 
-.post__content > p:last-child,
-.post__content > blockquote > p:last-child {
-    margin-bottom: 0;
-}
-
 .post blockquote,
 .post cite {
     max-width: 600px;
@@ -241,24 +247,16 @@ a.post__title-wrapper:hover {
 }
 
 .post__preview {
-    margin: var(--textMargin) 0;
+    margin-top: var(--textMargin);
     padding-bottom: var(--textMargin);
     border-bottom: 1px solid var(--accentFgColor);
-}
-
-.post__preview img {
-    margin-bottom: var(--textMargin);
-}
-
-.post__preview--feed {
-    margin-bottom: 0;
 }
 
 .post__comments {
     margin-top: var(--uiGap);
 }
 
-.post__content > p {
+.post p {
     margin-bottom: var(--textMargin);
     line-height: 1.5;
 }
