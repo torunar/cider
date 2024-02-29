@@ -255,11 +255,11 @@ iframe:last-of-type {
 }
 
 .gallery-4 {
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .gallery-2 {
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr 1fr;
 }
 
 [class^="gallery-"] a img {
