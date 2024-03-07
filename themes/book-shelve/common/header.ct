@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><!--{var:mainTitle}--></title>
     <!--{file:common/meta.ct}-->
-    <link rel="stylesheet" href="<!--{var:CIDER_host}-->/css/main.css?v=<!--{var:CIDER_version}-->" />
-    <link rel="alternate" type="application/rss+xml" title="<!--{var:CIDER_blogName}-->" href="<!--{var:CIDER_host}-->/rss.xml" />
+    <link rel="stylesheet" href="<!--{var:CIDER_homepage}-->/css/main.css?v=<!--{var:CIDER_version}-->" />
+    <link rel="alternate" type="application/rss+xml" title="<!--{var:CIDER_blogName}-->" href="<!--{var:CIDER_homepage}-->/rss.xml" />
     <link rel="canonical" href="<!--{var:canonicalLink}-->" />
 </head>
 <body>

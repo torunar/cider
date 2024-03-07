@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CIDER_version="4.0.2"
+CIDER_version="5.0.0"
 
 # a cellar is the place where a cider comes from
 CIDER_cellar="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -31,7 +31,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # validate arguments passed via CLI or config
-validateArgs "${CIDER_inputDir}" "${CIDER_outputDir}" "${CIDER_themeDir}" "${CIDER_pageSize}" "${CIDER_host}"
+validateArgs "${CIDER_inputDir}" "${CIDER_outputDir}" "${CIDER_themeDir}" "${CIDER_pageSize}" "${CIDER_homepage}"
 if [ $? -ne 0 ]; then
     exit $?
 fi
@@ -51,7 +51,7 @@ fi
 # open sitemap and RSS
 if [ -z "${CIDER_buildPost}" ]; then
     writeSitemapHeader "${CIDER_outputDir}"
-    writeRssHeader "${CIDER_outputDir}" "${CIDER_blogName}" "${CIDER_host}" "${CIDER_blogDescription}" "${CIDER_blogLanguage}" "${CIDER_version}"
+    writeRssHeader "${CIDER_outputDir}" "${CIDER_blogName}" "${CIDER_homepage}" "${CIDER_blogDescription}" "${CIDER_blogLanguage}" "${CIDER_version}"
 fi
 
 lastPostPath="${postsList[${#postsList[@]}-1]}"

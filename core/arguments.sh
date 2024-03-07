@@ -37,8 +37,8 @@ function parseArgs()
                 CIDER_pageSize="${arg#*=}"
                 shift
                 ;;
-            -H=*|--host=*)
-                CIDER_host="${arg#*=}"
+            -H=*|--homepage=*)
+                CIDER_homepage="${arg#*=}"
                 shift
                 ;;
             -x)
@@ -93,7 +93,7 @@ CIDER: Markdown-based blogging engine using BASH.
 
 Usage:
 
-    cider.sh [-b|--buildPost] [-c|--config] [-l|--localization] [-i|--inputDir] [-o|--outputDir] [-t|--theme] [-p|--pageSize] [-H|--host] [-h|--help]
+    cider.sh [-c|--config] [-l|--localization] [-i|--inputDir] [-o|--outputDir] [-t|--theme] [-p|--pageSize] [-H|--homepage] [-b|--buildPost] [-h|--help]
 
     -b|--buildPost     Slug of the single post to be built.
                        E.g.: 2019/12/25/merry-xmas
@@ -117,8 +117,11 @@ Usage:
 
     -p|--pageSize      The amount of posts per page.
 
-    -H|--host          Homepage address.
+    -H|--homepage      Homepage address.
                        E.g.: http://example.com
+
+    -b|--buildPost     Single post slug to rebuild
+                       E.g.: 2024/03/07/configuring-cider
 
     -h|--help          Show this help and exit.
 

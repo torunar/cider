@@ -1,7 +1,7 @@
 <header class="header header--post">
     <div class="container" id="top">
         <h1 class="header__title">
-            <a class="header__home-link" href="<!--{var:CIDER_host}-->/#top"><!--{var:CIDER_blogName}--></a>
+            <a class="header__home-link" href="<!--{var:CIDER_homepage}-->/#top"><!--{var:CIDER_blogName}--></a>
             <small class="header__description"><!--{var:CIDER_blogDescription}--></small>
         </h1>
     </div>

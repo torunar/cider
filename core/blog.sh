@@ -25,7 +25,7 @@ function getPostPreview() {
         b loop
     }' "${postFilePath}" \
         | sed -E -e "s~(src=|href=)\"\./~\1\"${postLink}~g" \
-        | sed -E -e "s~(src=|href=)\"/~\1\"${CIDER_host}/~g"
+        | sed -E -e "s~(src=|href=)\"/~\1\"${CIDER_homepage}/~g"
 
 }
 
@@ -56,7 +56,7 @@ function getPostContent() {
 
     sed -e "1,${skipPosition}d" "${1}" \
         | sed -E -e "s~(src=|href=)\"\./~\1\"${postLink}~g" \
-        | sed -E -e "s~(src=|href=)\"/~\1\"${CIDER_host}/~g"
+        | sed -E -e "s~(src=|href=)\"/~\1\"${CIDER_homepage}/~g"
 
 }
 
@@ -74,7 +74,7 @@ function renderPaginationLink() {
     if [ $pageNumber == 1 ]; then
         local pageLinkUrl="${CIDR_host}/"
     else
-        local pageLinkUrl="${CIDER_host}/${pageNumber}/"
+        local pageLinkUrl="${CIDER_homepage}/${pageNumber}/"
     fi
 
     renderTemplate "${CIDER_themeDir}" "common/page_link.ct" "${outputDir}/page_link.html"
@@ -128,7 +128,7 @@ function renderPost() {
     compiledPostPath="${outputDir}/index.html"
     listItemPath="${CIDER_outputDir}/post_${postNumber}.html"
     postLink="/${postPath}/"
-    canonicalLink="${CIDER_host}${postLink}"
+    canonicalLink="${CIDER_homepage}${postLink}"
 
     markdown -html4tags "${inputPath}" > "${tmpPostPath}"
 
@@ -148,7 +148,7 @@ function renderPost() {
     if [ -z "${CIDER_disqusId}" ]; then
         renderVariable "${compiledPostPath}" "postComments" ""
     else
-        renderPostComments "${compiledPostPath}" "${CIDER_host}${postLink}" "${postLink}" "${outputDir}"
+        renderPostComments "${compiledPostPath}" "${CIDER_homepage}${postLink}" "${postLink}" "${outputDir}"
     fi
 
     tr=( "${CIDER_localization[@]}" postLink postDate postTitle postPreview postContent mainTitle canonicalLink )
@@ -174,11 +174,11 @@ function renderIndexPage() {
     if [ $pageNumber == 1 ]; then
         indexPagePath="${CIDER_outputDir}/index.html"
         mainTitle="${CIDER_mainTitle}"
-        canonicalLink="${CIDER_host}/"
+        canonicalLink="${CIDER_homepage}/"
     else
         indexPagePath="${CIDER_outputDir}/${pageNumber}/index.html"
         mainTitle="${CIDER_mainTitlePaged}"
-        canonicalLink="${CIDER_host}/${pageNumber}/"
+        canonicalLink="${CIDER_homepage}/${pageNumber}/"
     fi
 
     mkdir -p $(dirname "${indexPagePath}")
