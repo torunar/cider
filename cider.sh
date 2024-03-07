@@ -11,10 +11,7 @@ source "${CIDER_cellar}/core/arguments.sh"
 source "${CIDER_cellar}/core/dependencies.sh"
 source "${CIDER_cellar}/core/blog.sh"
 source "${CIDER_cellar}/core/config.sh"
-
-# load localization
 source "${CIDER_cellar}/core/localization.sh"
-CIDER_localization=( $(compgen -A variable | grep CIDER_) )
 
 # parse CLI arguments
 parseArgs $@
@@ -35,6 +32,8 @@ validateArgs "${CIDER_inputDir}" "${CIDER_outputDir}" "${CIDER_themeDir}" "${CID
 if [ $? -ne 0 ]; then
     exit $?
 fi
+
+CIDER_localization=( $(compgen -A variable | grep CIDER_) )
 
 # copy the whole theme
 cp -r "${CIDER_themeDir}/"* "${CIDER_outputDir}"
