@@ -1,0 +1,6 @@
+<li>
+    <a href="<!--{var:CIDER_homepage}--><!--{var:postLink}-->">
+        <!--{var:postTitle}-->
+        <small>(<!--{var:postDate}-->)</small>
+    </a>
+</li>

@@ -1,0 +1,5 @@
+<nav>
+    <!--{var:pageLinkPrev}-->
+    <strong><!--{var:pageLinkCurr}--></strong>
+    <!--{var:pageLinkNext}-->
+</nav>

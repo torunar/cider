@@ -1,0 +1,8 @@
+<!--{file:common/header.ct}-->
+    <!--{file:index/header.ct}-->
+    <ul>
+        <!--{var:postsList}-->
+    </ul>
+    <!--{file:common/pagination.ct}-->
+    <!--{file:index/footer.ct}-->
+<!--{file:common/footer.ct}-->

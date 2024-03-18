@@ -1,0 +1,11 @@
+<!--{file:common/header.ct}-->
+    <!--{file:index/header.ct}-->
+    <h1><!--{var:postTitle}--></h1>
+    <small><!--{var:postDate}--></small>
+    <article>
+        <!--{var:postPreview}-->
+        <!--{var:postContent}-->
+    </article>
+    <!--{var:postComments}-->
+    <!--{file:index/footer.ct}-->
+<!--{file:common/footer.ct}-->

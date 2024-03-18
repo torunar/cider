@@ -1,0 +1,6 @@
+<header>
+    <h1>
+        <a href="<!--{var:CIDER_homepage}-->/"><!--{var:CIDER_blogName}--></a>
+        <small><!--{var:CIDER_blogDescription}--></small>
+    </h1>
+</header>
