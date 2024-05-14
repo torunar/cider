@@ -3,3 +3,4 @@
 <meta property="twitter:card" content="summary" />
 <meta property="twitter:title" content="<!--{var:mainTitle}-->" />
 <meta property="twitter:description" content="<!--{var:CIDER_blogName}--> :: <!--{var:CIDER_blogDescription}-->" />
+<!--{var:CIDER_meta}-->

@@ -97,6 +97,7 @@ Localization messages are used in theme templates to display predefined texts an
 * `CIDER_blogName` — blog name
 * `CIDER_blogDescription` — blog description (used in RSS, shown in default themes)
 * `CIDER_commentsTitle` — title shown before Disqus comments widget
+* `CIDER_meta` — any additional meta information assigned to a blog
 
 Default localization messages are loaded from [core/localization.sh](core/localization.sh).
 
