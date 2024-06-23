@@ -18,7 +18,7 @@ CIDER is a markdown-based blogging engine using BASH.
 # Usage
 
 ```
-cider.sh [-c|--config] [-l|--localization] [-i|--inputDir] [-o|--outputDir] [-t|--theme] [-p|--pageSize] [-H|--homepage] [-b|--buildPost] [-h|--help]
+cider.sh [-c|--config] [-l|--localization] [-i|--inputDir] [-o|--outputDir] [-t|--theme] [-p|--pageSize] [-H|--homepage] [-h|--help]
 
 -c|--config        Path to the configuration file.
                    The default one is loaded from `core/config.sh`
@@ -41,9 +41,6 @@ cider.sh [-c|--config] [-l|--localization] [-i|--inputDir] [-o|--outputDir] [-t|
 
 -H|--homepage      Homepage address.
                    E.g.: http://example.com
-
--b|--buildPost     Single post slug to rebuild
-                   E.g.: 2024/03/07/configuring-cider
 
 -h|--help          Show this help and exit.
 ```
@@ -72,7 +69,6 @@ Configuration parameters affect the build process and resulting blog structure:
 * `CIDER_homepage` — homepage address
 * `CIDER_blogLanguage` — language (used in RSS and specifies HTML lang attribute)
 * `CIDER_disqusId` — [Disqus](https://disqus.com/) comment widget ID
-* `CIDER_buildPost` — single post slug (e.g. `2024/03/07/configuring-cider`) to rebuild
 
 Default configuration parameter values are loaded from [core/config.sh](core/config.sh).
 

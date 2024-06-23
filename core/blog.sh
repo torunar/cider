@@ -91,9 +91,7 @@ function getPostDate() {
 
 function getPostsList() {
     local inputDir="${1}"
-    local buildPost="${2}"
     echo $(find "${inputDir}" -type f -name "index.md" \
-        | grep "${buildPost}" \
         | sed -E -e 's~(.*)([0-9]{4}/[0-9]{2}/[0-9]{2}/[^/]+)/index.md~\2~g' \
         | sort -r \
     )
@@ -116,34 +114,34 @@ function renderPostComments() {
 function renderPost() {
     local postPath="${1}"
     local pageNumber="${2}"
-    local postNumber="${3}"
+    local postId=$(printf "%03d" "${3}")-$RANDOM
 
-    inputPath="${CIDER_inputDir}/${postPath}/index.md"
-    outputDir="${CIDER_outputDir}/${postPath}"
+    local inputPath="${CIDER_inputDir}/${postPath}/index.md"
+    local outputDir="${CIDER_outputDir}/${postPath}"
 
     mkdir -p "${outputDir}"
     cp -r "${CIDER_inputDir}/${postPath}/"* "${outputDir}"
 
-    tmpPostPath="${outputDir}/.index.html"
-    compiledPostPath="${outputDir}/index.html"
-    listItemPath="${CIDER_outputDir}/post_${postNumber}.html"
-    postLink="/${postPath}/"
-    canonicalLink="${CIDER_homepage}${postLink}"
+    local tmpPostPath="${outputDir}/.index.html"
+    local compiledPostPath="${outputDir}/index.html"
+    local listItemPath="${CIDER_outputDir}/post_${postId}.html"
+    local postLink="/${postPath}/"
+    local canonicalLink="${CIDER_homepage}${postLink}"
 
     markdown -html4tags "${inputPath}" > "${tmpPostPath}"
 
-    postDate=$(getPostDate "${postPath}")
-    postTitle=$(getPostTitle "${tmpPostPath}")
-
-    postPreview=$(getPostPreview "${tmpPostPath}" "${postLink}")
-    postContent=$(getPostContent "${tmpPostPath}" "${postLink}")
-
-    mainTitle=$(stripTags "${postTitle}")
+    local postDate=$(getPostDate "${postPath}")
+    local postTitle=$(getPostTitle "${tmpPostPath}")
+    local postPreview=$(getPostPreview "${tmpPostPath}" "${postLink}")
+    local postContent=$(getPostContent "${tmpPostPath}" "${postLink}")
+    local mainTitle=$(stripTags "${postTitle}")
 
     echo "${canonicalLink}: ${mainTitle}"
 
     renderTemplate "${CIDER_themeDir}" "posts/single.ct" "${compiledPostPath}"
-    renderTemplate "${CIDER_themeDir}" "posts/list_item.ct" "${listItemPath}"
+    if [ ! -e "${CIDER_inputDir}/${postPath}/.hidden" ]; then
+        renderTemplate "${CIDER_themeDir}" "posts/list_item.ct" "${listItemPath}"
+    fi
 
     if [ -z "${CIDER_disqusId}" ]; then
         renderVariable "${compiledPostPath}" "postComments" ""
@@ -151,20 +149,20 @@ function renderPost() {
         renderPostComments "${compiledPostPath}" "${CIDER_homepage}${postLink}" "${postLink}" "${outputDir}"
     fi
 
-    tr=( "${CIDER_localization[@]}" postLink postDate postTitle postPreview postContent mainTitle canonicalLink )
+    local tr=( "${CIDER_localization[@]}" postLink postDate postTitle postPreview postContent mainTitle canonicalLink )
     for varName in "${tr[@]}"; do
         renderVariable "${compiledPostPath}" "${varName}" "${!varName}"
-        renderVariable "${listItemPath}" "${varName}" "${!varName}"
+        if [ ! -e "${CIDER_inputDir}/${postPath}/.hidden" ]; then
+            renderVariable "${listItemPath}" "${varName}" "${!varName}"
+        fi
     done
 
     rm -f "${tmpPostPath}"
 
     # add post to sitemap and RSS feed
-    if [ -z "${CIDER_buildPost}" ]; then
-        writeSitemapEntry "${CIDER_outputDir}" "${canonicalLink}"
-        if [ $pageNumber == 1 ]; then
-            writeRssEntry "${CIDER_outputDir}" "${postTitle}" "${canonicalLink}" "${postPreview}${postContent}" "${postDate}"
-        fi
+    writeSitemapEntry "${CIDER_outputDir}" "${canonicalLink}"
+    if [ $pageNumber == 1 ]; then
+        writeRssEntry "${CIDER_outputDir}" "${postTitle}" "${canonicalLink}" "${postPreview}${postContent}" "${postDate}"
     fi
 }
 

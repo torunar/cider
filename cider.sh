@@ -41,17 +41,15 @@ cp -r "${CIDER_themeDir}/"* "${CIDER_outputDir}"
 # get list of posts
 postNumber=0
 pageNumber=1
-postsList=($(getPostsList "${CIDER_inputDir}" "${CIDER_buildPost}"))
+postsList=($(getPostsList "${CIDER_inputDir}"))
 if [ -z "${postsList}" ]; then
     echo 'No posts to render'
     exit 0
 fi
 
 # open sitemap and RSS
-if [ -z "${CIDER_buildPost}" ]; then
-    writeSitemapHeader "${CIDER_outputDir}"
-    writeRssHeader "${CIDER_outputDir}" "${CIDER_blogName}" "${CIDER_homepage}" "${CIDER_blogDescription}" "${CIDER_blogLanguage}" "${CIDER_version}"
-fi
+writeSitemapHeader "${CIDER_outputDir}"
+writeRssHeader "${CIDER_outputDir}" "${CIDER_blogName}" "${CIDER_homepage}" "${CIDER_blogDescription}" "${CIDER_blogLanguage}" "${CIDER_version}"
 
 lastPostPath="${postsList[${#postsList[@]}-1]}"
 for postPath in "${postsList[@]}"; do
@@ -60,10 +58,9 @@ for postPath in "${postsList[@]}"; do
     else
         renderPost "${postPath}" "${pageNumber}" "${postNumber}" &
     fi
-    ((postNumber++))
 
-    if [ ! -z "${CIDER_buildPost}" ]; then
-        continue
+    if [ ! -e "${CIDER_inputDir}/${postPath}/.hidden" ]; then
+        ((postNumber++))
     fi
 
     if [[ "${postNumber}" == "${CIDER_pageSize}" || "${postPath}" == "${lastPostPath}" ]]; then
@@ -74,10 +71,8 @@ for postPath in "${postsList[@]}"; do
 done
 
 # close sitemap
-if [ -z "${CIDER_buildPost}" ]; then
-    writeSitemapFooter "${CIDER_outputDir}"
-    writeRssFooter "${CIDER_outputDir}"
-fi
+writeSitemapFooter "${CIDER_outputDir}"
+writeRssFooter "${CIDER_outputDir}"
 
 # clean up
 find "${CIDER_outputDir}" -type f -name "*.md" -delete

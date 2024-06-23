@@ -5,4 +5,3 @@ CIDER_pageSize=10
 CIDER_homepage="http://example.com"
 CIDER_blogLanguage="en-US"
 CIDER_disqusId=""
-CIDER_buildPost=""
