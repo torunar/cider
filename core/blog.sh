@@ -72,7 +72,7 @@ function renderPaginationLink() {
     local outputDir="${5}"
 
     if [ $pageNumber == 1 ]; then
-        local pageLinkUrl="${CIDR_host}/"
+        local pageLinkUrl="${CIDER_homepage}/"
     else
         local pageLinkUrl="${CIDER_homepage}/${pageNumber}/"
     fi
