@@ -160,10 +160,6 @@ iframe {
     }
 }
 
-iframe:last-of-type {
-    margin-bottom: 0;
-}
-
 .header__title,
 .post__title,
 .post-comments__title {
