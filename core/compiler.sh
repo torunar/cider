@@ -15,8 +15,8 @@ function renderTemplate() {
     IFS=''
 
     while read -r line || [ -n "${line}" ]; do
-        local templateToRender=$(echo "${line}" | sed -E -e 's/^[ \t]*<!--\{file:(.+)\}-->/\1/g')
-        if [ "${templateToRender}" != "${line}" ]; then
+        local templateToRender=$(printf "%s" "${line}" | sed -E -n 's/^[ \t]*<!--\{file:(.+)\}-->/\1/p')
+        if [ -n "${templateToRender}" ]; then
             if [ -f "${templateToRender}" ]; then
                 renderTemplate "${templatesDir}" "${templateToRender}" "${outputPath}" 1
             fi
@@ -34,16 +34,11 @@ function renderVariable() {
     local templatePath="${1}"
     local varName="${2}"
     # escape /, \, &, replace newline with non-printing character, trim newlines
-    local varValue=$(echo -n "${3}"    \
-        | sed -e 's~\\~\\\\~g'         \
-        | sed -e 's~/~\\/~g'           \
-        | sed -e 's~\&~\\\&~g'         \
-        | tr '\n' '\r'                 \
-    )
-    local renderedTemplate=$(sed -e $"s/<!--{var:${varName}}-->/${varValue}/g" "${templatePath}" | tr '\r' '\n')
+    local varValue=$(printf "%s" "${3}" | sed -e 's~\\~\\\\~g; s~/~\\/~g; s~\&~\\\&~g' | tr '\n' '\r')
+    local renderedTemplate=$(sed -e "s/<!--{var:${varName}}-->/${varValue}/g" "${templatePath}" | tr '\r' '\n')
     echo -n "${renderedTemplate}" > "${templatePath}"
 }
 
 function stripTags() {
-    echo -n "${1}" | sed -e 's/<[^>]\+>//g'
+    printf "%s" "${1}" | sed -e 's/<[^>]\+>//g'
 }

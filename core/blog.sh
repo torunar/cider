@@ -6,7 +6,7 @@ source "${CIDER_cellar}/core/sitemap.sh"
 source "${CIDER_cellar}/core/rss.sh"
 
 function getPostTitle() {
-    head -n 1 "${1}" | sed -n -E -e 's/^<h1>(.*)<\/h1>$/\1/gp'
+    sed -n -E -e '1s/^<h1>(.*)<\/h1>$/\1/p' "${1}"
 }
 
 # search for a block between two <hr>'s
@@ -24,8 +24,7 @@ function getPostPreview() {
         }
         b loop
     }' "${postFilePath}" \
-        | sed -E -e "s~(src=|href=)\"\./~\1\"${postLink}~g" \
-        | sed -E -e "s~(src=|href=)\"/~\1\"${CIDER_homepage}/~g"
+        | sed -E -e "s~(src=|href=)\"\./~\1\"${postLink}~g; s~(src=|href=)\"/~\1\"${CIDER_homepage}/~g"
 
 }
 
@@ -54,14 +53,12 @@ function getPostContent() {
         local skipPosition=2
     fi
 
-    sed -e "1,${skipPosition}d" "${1}" \
-        | sed -E -e "s~(src=|href=)\"\./~\1\"${postLink}~g" \
-        | sed -E -e "s~(src=|href=)\"/~\1\"${CIDER_homepage}/~g"
+    sed -E -e "1,${skipPosition}d; s~(src=|href=)\"\./~\1\"${postLink}~g; s~(src=|href=)\"/~\1\"${CIDER_homepage}/~g" "${1}"
 
 }
 
 function getPostDir() {
-    echo "${1}" | sed -e 's~/index.md~~g'
+    echo "${1%/index.md}"
 }
 
 function renderPaginationLink() {
@@ -86,13 +83,14 @@ function renderPaginationLink() {
 }
 
 function getPostDate() {
-    echo -n "${1}" | sed -E -e 's~(.*)([0-9]{4}/[0-9]{2}/[0-9]{2})/(.*)~\2~g'
+    local postPath="${1}"
+    [[ $postPath =~ ([0-9]{4}/[0-9]{2}/[0-9]{2}) ]] && echo -n "${BASH_REMATCH[1]}"
 }
 
 function getPostsList() {
     local inputDir="${1}"
     echo $(find "${inputDir}" -type f -name "index.md" \
-        | sed -E -e 's~(.*)([0-9]{4}/[0-9]{2}/[0-9]{2}/[^/]+)/index.md~\2~g' \
+        | sed -E -e 's~.*/([0-9]{4}/[0-9]{2}/[0-9]{2}/[^/]+)/index.md$~\1~g' \
         | sort -r \
     )
 }
