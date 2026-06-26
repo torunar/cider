@@ -9,22 +9,10 @@
 }
 
 * {
-    all: unset;
-}
-
-* {
     line-height: 1.5em;
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", "Droid Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     color: var(--fgColor);
-}
-
-head, script {
-    display: none;
-}
-
-footer, header, div, h1, h2, h3, h4, h5, h6, p, iframe {
-    display: block;
 }
 
 a {
@@ -53,8 +41,8 @@ sup {
     vertical-align: 0.75em;
 }
 
-h1, h2, h3, h4, h5, h6, strong, b {
-    font-weight: bold;
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
 }
 
 h1 {
@@ -81,14 +69,6 @@ h5, h6 {
     margin: 0.5em 0;
 }
 
-i, em {
-    font-style: italic;
-}
-
-s, del, strike {
-    text-decoration-line: line-through;
-}
-
 img {
     max-width: 100%;
 }
@@ -98,7 +78,7 @@ blockquote {
     display: block;
     border-left: 2px solid;
     padding: var(--uiHalfGap) var(--uiGap);
-    margin-bottom: var(--uiHalfGap);
+    margin: 0 0 var(--uiHalfGap) 0;
     overflow-x: auto;
     background: var(--bgColor);
 }
@@ -112,7 +92,6 @@ code {
 }
 
 center {
-    display: block;
     text-align: center;
 }
 
@@ -213,7 +192,6 @@ iframe {
 
 .post__content ul,
 .post__content ol {
-    display: block;
     margin: var(--textMargin) 0;
     padding-left: var(--uiHalfGap);
 }
@@ -227,7 +205,6 @@ iframe {
 }
 
 .post__content li {
-    display: list-item;
     margin-bottom: calc(var(--textMargin) / 2);
 }
 
